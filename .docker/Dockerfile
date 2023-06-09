@@ -6,7 +6,7 @@ FROM $BASE_NGINX as nginx-builder
 COPY .docker/nginx/templates/* /etc/nginx/templates/
 ## php-fpm-alpine-builder image: install common php extension need for project
 FROM $BASE_PHP AS php-fpm-alpine-builder
-LABEL maintainer="thinhld <thinhld@vnext.vn>"
+LABEL maintainer="longtt"
 ENV TZ=Asia/Tokyo
 ENV PYTHONUNBUFFERED=1
 RUN set -eux; \
@@ -34,7 +34,7 @@ FROM php-fpm-alpine-builder AS php-fpm-prod
 ARG GIT_COMMIT_HASH=unspecified
 ARG GIT_BRANCH_NAME=unspecified
 
-LABEL maintainer="hungtd <hungtd@vnext.vn>" \
+LABEL maintainer="longtt" \
     git.commit=$GIT_COMMIT_HASH \
     git.branch=$GIT_BRANCH_NAME
 RUN set -eux; \
@@ -55,7 +55,7 @@ FROM nginx-builder as test-queue-public
 ARG GIT_COMMIT_HASH=unspecified
 ARG GIT_BRANCH_NAME=unspecified
 
-LABEL maintainer="hungtd <hungtd@vnext.vn>" \
+LABEL maintainer="longtt" \
     git.commit=$GIT_COMMIT_HASH \
     git.branch=$GIT_BRANCH_NAME
 
@@ -91,7 +91,7 @@ FROM php-fpm-prod AS test-queue-app
 ARG GIT_COMMIT_HASH=unspecified
 ARG GIT_BRANCH_NAME=unspecified
 
-LABEL maintainer="hungtd <hungtd@vnext.vn>" \
+LABEL maintainer="longtt" \
     git.commit=$GIT_COMMIT_HASH \
     git.branch=$GIT_BRANCH_NAME
 
